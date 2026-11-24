@@ -1,5 +1,5 @@
 {
-  "name": "junk-app",
+  "name": "junkbidz",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,8 +9,8 @@
     "lint": "tsc --noEmit",
     "pages:build": "npx @cloudflare/next-on-pages",
     "preview": "npm run pages:build && wrangler pages dev .vercel/output/static --compatibility-flag=nodejs_compat",
-    "deploy:preview": "npm run pages:build && wrangler pages deploy .vercel/output/static --project-name=junk-app --branch=preview",
-    "deploy": "npm run pages:build && wrangler pages deploy .vercel/output/static --project-name=junk-app --branch=main"
+    "deploy:preview": "npm run pages:build && wrangler pages deploy .vercel/output/static --project-name=junkbidz --branch=preview",
+    "deploy": "npm run pages:build && wrangler pages deploy .vercel/output/static --project-name=junkbidz --branch=main"
   },
   "dependencies": {
     "@supabase/ssr": "^0.6.1",

@@ -1,4 +1,4 @@
--- Clearbid core: profiles, photo storage, ZIP distance. Safe to re-run.
+-- JunkBidz core: profiles, photo storage, ZIP distance. Safe to re-run.
 -- Run in the Supabase SQL editor, in order: 0001 → 0005, then the four files in supabase/seed/.
 
 -- ───────────── profiles ─────────────

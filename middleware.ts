@@ -3,10 +3,17 @@ import { NextResponse, type NextRequest } from "next/server";
 
 const PROTECTED = ["/post", "/jobs", "/account", "/messages", "/hauler", "/become-hauler", "/admin"];
 
+// The one official address. Google treats each address as a separate site, so the others forward here.
+const HOME = "https://junkbidz.com";
+const OLD_HOSTS = new Set(["www.junkbidz.com", "junkbidz.pages.dev"]);
+
 export async function middleware(request: NextRequest) {
   const host = (request.headers.get("host") ?? "").toLowerCase();
+  if (OLD_HOSTS.has(host)) {
+    return NextResponse.redirect(new URL(request.nextUrl.pathname + request.nextUrl.search, HOME), 301);
+  }
   const res = await handle(request);
-  // Test previews (abc123.<project>.pages.dev) are kept out of Google.
+  // Test previews (abc123.junkbidz.pages.dev) are kept out of Google.
   if (host.endsWith(".pages.dev")) res.headers.set("X-Robots-Tag", "noindex, nofollow");
   return res;
 }

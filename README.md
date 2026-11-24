@@ -1,4 +1,4 @@
-# Clearbid: junk removal marketplace
+# JunkBidz (junkbidz.com): junk removal marketplace
 
 Customers post a junk removal job. Approved junk removal companies whose service area covers the job's ZIP get it and send quotes. The customer compares prices, ratings and distance, chats in the app, and hires one. Then they mark the job done and leave a review.
 
