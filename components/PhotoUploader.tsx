@@ -8,9 +8,9 @@ type Pending = { key: string; preview: string; state: "working" | "failed" };
 // Uploads into the caller's own folder of the photos bucket (<uid>/<subfolder>/...; no subfolder = <uid>/...).
 // Each photo is shrunk in the browser first (see lib/photos), three upload at a time, and each one shows up as soon as
 // it's done (in the order picked) instead of after the whole batch.
-export default function PhotoUploader({ userId, photos, setPhotos, max = 8, subfolder = "jobs", required = false, onBusyChange }: {
+export default function PhotoUploader({ userId, photos, setPhotos, max = 8, subfolder = "jobs", required = false, min = 0, onBusyChange }: {
   userId: string; photos: string[]; setPhotos: React.Dispatch<React.SetStateAction<string[]>>; max?: number;
-  subfolder?: string | null; required?: boolean; onBusyChange?: (busy: boolean) => void;
+  subfolder?: string | null; required?: boolean; min?: number; onBusyChange?: (busy: boolean) => void;
 }) {
   const [pending, setPending] = useState<Pending[]>([]);
   const [error, setError] = useState("");
@@ -74,7 +74,7 @@ export default function PhotoUploader({ userId, photos, setPhotos, max = 8, subf
   return (
     <div className="photo-up">
       <div className="mute" style={{ marginBottom: 6 }}>
-        Photos ({photos.length}/{max}){required && <strong> — at least 1 required</strong>}
+        Photos ({photos.length}/{max}){min > 0 ? <strong>{photos.length >= min ? " ✓" : ` · at least ${min} required`}</strong> : required && <strong> · at least 1 required</strong>}
         {photos.length > 0 && <span> · the first photo is the cover</span>}
       </div>
       <div className="previews">

@@ -5,6 +5,8 @@ import { createClient } from "@/lib/supabase/client";
 import { ACCESS, HAZARDOUS, ITEM_TYPES, LOAD_SIZES, WINDOWS, autoTitle } from "@/lib/junk";
 import PhotoUploader from "./PhotoUploader";
 
+const MIN_PHOTOS = 3;   // also enforced in the database (jobs_min_3_photos, migration 0006)
+
 // Post a job: what, how much, where, when. Goes to every approved company whose area covers the ZIP.
 export default function JobForm({ userId, defaultZip }: { userId: string; defaultZip: string }) {
   const router = useRouter();
@@ -33,6 +35,7 @@ export default function JobForm({ userId, defaultZip }: { userId: string; defaul
     if (!/^[0-9]{5}$/.test(s("zip"))) return fail("Enter a 5-digit ZIP code.");
     if (s("address").length < 5) return fail("Enter the pickup address. Only the company you hire will see it.");
     if (uploading) return fail("Wait for the photos to finish uploading.");
+    if (photos.length < MIN_PHOTOS) return fail(`Add at least ${MIN_PHOTOS} photos so companies can give an accurate quote.`, "photos-h");
 
     const supabase = createClient();
     const { data, error } = await supabase.from("jobs").insert({
@@ -101,9 +104,9 @@ export default function JobForm({ userId, defaultZip }: { userId: string; defaul
       </section>
 
       <section className="fsec">
-        <h2>Photos</h2>
-        <p className="mute" style={{ margin: "0 0 8px" }}>Photos get you more accurate quotes.</p>
-        <PhotoUploader userId={userId} photos={photos} setPhotos={setPhotos} onBusyChange={setUploading} />
+        <h2 id="photos-h">Photos</h2>
+        <p className="mute" style={{ margin: "0 0 8px" }}>Add at least {MIN_PHOTOS} photos of everything that needs to go, from a few angles. It gets you accurate quotes.</p>
+        <PhotoUploader userId={userId} photos={photos} setPhotos={setPhotos} onBusyChange={setUploading} min={MIN_PHOTOS} />
       </section>
 
       <section className="fsec">
