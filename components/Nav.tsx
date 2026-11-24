@@ -65,6 +65,7 @@ export default function Nav() {
           </>
         ) : (
           <>
+            {link("/demo", "Try the demo")}
             {link("/how-it-works", "How it works")}
             {link("/become-hauler", "For companies")}
             {link("/login", "Log in")}

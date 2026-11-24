@@ -21,14 +21,18 @@ export default async function Home() {
             {!user && <Link className="btn ghost big" href="/become-hauler">I run a junk removal company</Link>}
             {user && <Link className="btn ghost big" href="/jobs">My jobs</Link>}
           </div>
+          <Link className="demo-toggle" href="/demo">
+            <span className="demo-switch" aria-hidden="true"><i /></span>
+            <span><b>See how it works</b><small>Try a demo job. No sign-up, quotes in seconds.</small></span>
+          </Link>
           <ul className="intro-points"><li><CheckIcon />Free for customers</li><li><ShieldIcon />Address stays private</li><li><StarIcon />Real reviews</li></ul>
         </div>
-        <div className="jk-demo" aria-hidden="true">
+        <Link href="/demo" className="jk-demo" aria-label="Try the demo">
           <div className="jk-demo-job"><b>Old couch + fridge</b><span>Furniture, Appliances · Half truck</span></div>
           {[["Bridge City Hauling", "★ 4.9 (112)", "$185", true], ["Greenline Removal", "★ 4.7 (64)", "$210", false], ["Northwest Junk Co.", "New", "$240", false]].map(([n, r, p, best]) => (
             <div key={String(n)} className={`jk-demo-q${best ? " best" : ""}`}><span><b>{n}</b><small>{r}</small></span><em>{p}</em></div>
           ))}
-        </div>
+        </Link>
       </section>
 
       <section className="jk-steps">
