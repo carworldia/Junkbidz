@@ -5,7 +5,8 @@ const PROTECTED = ["/post", "/jobs", "/account", "/messages", "/hauler", "/becom
 
 // The one official address. Google treats each address as a separate site, so the others forward here.
 const HOME = "https://junkbidz.com";
-const OLD_HOSTS = new Set(["www.junkbidz.com", "junkbidz.pages.dev"]);
+// Add "junkbidz.pages.dev" here once junkbidz.com is live, so the test address forwards too.
+const OLD_HOSTS = new Set(["www.junkbidz.com"]);
 
 export async function middleware(request: NextRequest) {
   const host = (request.headers.get("host") ?? "").toLowerCase();
