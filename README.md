@@ -8,7 +8,7 @@ Next.js 15 + Supabase (auth, Postgres + RLS, storage), deployed to Cloudflare Pa
 1. Create a new Supabase project.
 2. In `supabase/migrations/0005_admin.sql`, replace `owner@example.com` with your own email.
 3. Supabase → SQL editor → run `supabase/migrations/0001` to `0005` in order, then the six files in `supabase/seed/` (US ZIP code locations used for distance).
-4. `cp .env.example .env.local` and fill in the project URL and anon key.
+4. `cp .env.example .env.local` and fill in the project URL and publishable key (or legacy anon key).
 5. `npm install && npm run dev`
 6. Supabase → Auth → URL Configuration: add your site URL as the Site URL / redirect.
 7. Sign up with your admin email, confirm it, then run `0005_admin.sql` again (it switches admin on for confirmed allowlisted accounts).
